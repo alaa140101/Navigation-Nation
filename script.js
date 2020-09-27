@@ -1,6 +1,6 @@
 const menuBars = document.getElementById('menu-bars');
 const overlay = document.getElementById('overlay');
-const navList = document.querySelectorAll('nav li');
+const navs = document.querySelectorAll('nav li');
 
 function toggleNav() {
   // Toggle: Menu Bars Open/Closed
@@ -20,6 +20,9 @@ function toggleNav() {
 
 // Event Listeners
 menuBars.addEventListener('click', toggleNav);
-for (let index = 0; index < navList.length; index++) {
-  navList[index].addEventListener('click', toggleNav);
-}
+// for (let index = 0; index < navList.length; index++) {
+//   navList[index].addEventListener('click', toggleNav);
+// }
+navs.forEach((nav) => {
+  nav.addEventListener('click', toggleNav);
+});
