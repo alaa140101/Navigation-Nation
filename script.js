@@ -3,36 +3,32 @@ const overlay = document.getElementById('overlay');
 const navsNodeList = document.querySelectorAll('nav li');
 const navsArray = Array.prototype.slice.call(navsNodeList);
 
+// Control Navigation Animation
+function navAnimation(direction1, direction2) {
+  navsArray.forEach((nav, i) => {
+    nav.classList.replace(`slide-${direction1}-${i + 1}`,`slide-${direction2}-${i + 1}`);
+  })
+}
+
 function toggleNav() {
   // Toggle: Menu Bars Open/Closed
   menuBars.classList.toggle('change');
   // Check if Menu Bars Open
   if (menuBars.classList.contains('change')) {
-    overlay.classList.remove('overlay-slide-left');
     // Animate In - Overlay
-    overlay.classList.add('overlay-slide-right');
+    overlay.classList.replace('overlay-slide-left','overlay-slide-right');
     // Animate In - Overlay
-    navsArray.forEach((nav) => {
-      nav.classList.remove(`slide-out-${navsArray.indexOf(nav) + 1}`);
-      nav.classList.add(`slide-in-${navsArray.indexOf(nav) + 1}`);
-    });
+    navAnimation('out', 'in');
   } else {
-    overlay.classList.remove('overlay-slide-right');
     // Animate Out - Overlay
-    overlay.classList.add('overlay-slide-left');
+    overlay.classList.replace('overlay-slide-right','overlay-slide-left');
     // Animate Out - Overlay
-    navsArray.forEach((nav) => {
-      nav.classList.remove(`slide-in-${navsArray.indexOf(nav) + 1}`);
-      nav.classList.add(`slide-out-${navsArray.indexOf(nav) + 1}`);
-    });
+    navAnimation('in', 'out');
   }
 }
 
 // Event Listeners
 menuBars.addEventListener('click', toggleNav);
-// for (let index = 0; index < navList.length; index++) {
-//   navList[index].addEventListener('click', toggleNav);
-// }
 navsNodeList.forEach((nav) => {
   nav.addEventListener('click', toggleNav);
 });
